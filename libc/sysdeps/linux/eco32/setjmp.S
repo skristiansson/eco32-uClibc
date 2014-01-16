@@ -11,9 +11,24 @@
 #include <features.h>
 #include <jmpbuf-offsets.h>
 
-.globl __sigsetjmp
-.type  __sigsetjmp,@function
+	.globl setjmp
+	.type  setjmp,@function
+setjmp:
+	ori	$5,$0,1
+	j	__sigsetjmp
 
+.size setjmp,.-setjmp
+
+	.globl _setjmp
+	.type  _setjmp,@function
+_setjmp:
+	ori	$5,$0,0
+	j	__sigsetjmp
+
+.size _setjmp,.-_setjmp
+
+	.globl __sigsetjmp
+	.type  __sigsetjmp,@function
 __sigsetjmp:
 	stw	$16,$4,JB_REGS+0
 	stw	$17,$4,JB_REGS+4
