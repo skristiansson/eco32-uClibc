@@ -26,13 +26,13 @@ _start:
 	ldw	$5,$29,0	/* argc */
 	ldw	$6,$29,4	/* argv */
 	ori	$7,$0,_init	/* init */
-	/* adjust stack for the last two args */
-	subi	$29,$29,8
+	/* adjust stack for the last three args and regs $4 to $7 */
+	subi	$29,$29,12 + 16
 	ori	$8,$0,_fini	/* _fini */
-	stw	$8,$29,0
+	stw	$8,$29,16
 	ori	$8,$0,0
-	stw	$8,$29,4 	/* rtld_fini = NULL */
-	stw	$29,$29,8	/* stack end */
+	stw	$8,$29,20 	/* rtld_fini = NULL */
+	stw	$29,$29,24	/* stack end */
 
 	j	__uClibc_main
 
