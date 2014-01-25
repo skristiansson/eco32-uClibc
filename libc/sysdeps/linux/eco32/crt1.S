@@ -25,7 +25,7 @@ _start:
 	ori	$4,$0,main	/*  main */
 	ldw	$5,$29,0	/* argc */
 	ldw	$6,$29,4	/* argv */
-	ori	$7,$29,_init	/* init */
+	ori	$7,$0,_init	/* init */
 	/* adjust stack for the last two args */
 	subi	$29,$29,8
 	ori	$8,$0,_fini	/* _fini */
