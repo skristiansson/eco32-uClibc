@@ -24,7 +24,7 @@ _start:
 	/* Setup the arguments to __uClibc_main. */
 	ori	$4,$0,main	/*  main */
 	ldw	$5,$29,0	/* argc */
-	ldw	$6,$29,4	/* argv */
+	addi	$6,$29,4	/* argv */
 	ori	$7,$0,_init	/* init */
 	/* adjust stack for the last three args and regs $4 to $7 */
 	subi	$29,$29,12 + 16
