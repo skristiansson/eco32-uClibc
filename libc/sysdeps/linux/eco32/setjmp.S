@@ -43,7 +43,7 @@ __sigsetjmp:
 	stw	$29,$4,JB_SP
 	stw	$28,$4,JB_FP
 
-	ori	$8,$8,__sigjmp_save
+	ori	$8,$0,__sigjmp_save
 	jr	$8
 
 .size __sigsetjmp,.-__sigsetjmp
