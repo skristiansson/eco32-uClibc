@@ -9,7 +9,7 @@
 #undef EDEADLOCK /*Use Linux*/
 
 /* instruction used when calling abort() to kill yourself */
-#define __UCLIBC_ABORT_INSTRUCTION__ ".long 0xfc000000"
+#define __UCLIBC_ABORT_INSTRUCTION__ ".long 0xfb000000"
 
 /* can your target use syscall6() for mmap ? */
 #define __UCLIBC_MMAP_HAS_6_ARGS__
