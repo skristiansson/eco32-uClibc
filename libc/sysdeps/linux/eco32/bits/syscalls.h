@@ -8,22 +8,14 @@
 
 #include <errno.h>
 
-/*
- * GCC can't handle a constraint on $25 directly, hence the extra ori.
- * I think this might be related to that $25 is a fixed register,
- * but it needs investigation in gcc.
- */
 #define INTERNAL_SYSCALL_NCS(name, err, nr, args...)			\
 (__extension__								\
 ({									\
-	register long __ret __asm__("$2");				\
-	long _scno = name;						\
+	register long __ret __asm__("$2") = name;			\
 	LOAD_ARGS_##nr(args);						\
-	__asm__ __volatile__("ori $25,%1,0\n"				\
-			     "trap"					\
-			     : "=r"(__ret), "=r"(_scno)			\
-			       ASM_ARGS_##nr(=r)			\
-			     : "r"(_scno) ASM_ARGS_##nr(r)		\
+	__asm__ __volatile__("trap"					\
+			     : "=r"(__ret) ASM_ARGS_##nr(=r)		\
+			     : "r"(__ret) ASM_ARGS_##nr(r)		\
 			     : ASM_CLOBBERS_##nr			\
 			       "$10", "$11", "$12", "$13",		\
 			       "$14", "$15", "memory");			\
